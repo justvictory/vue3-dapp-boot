@@ -42,8 +42,8 @@
       }
     ],
     "paths": {
-      "vue-dapp": ["./src/index.ts"],
-      "vue-dapp/*": ["./src/*"]
+      "vue3-dapp-boot": ["./src/index.ts"],
+      "vue3-dapp-boot/*": ["./src/*"]
     }
   }
 }

@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [vue(), WindiCSS()],
   resolve: {
     alias: {
-      'vue-dapp': resolve(__dirname, './src/index.ts'),
+      'vue3-dapp-boot': resolve(__dirname, './src/index.ts'),
     },
   },
   build: {

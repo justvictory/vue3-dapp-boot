@@ -13,7 +13,7 @@ import {
   MetaMaskConnector,
   WalletConnectConnector,
   CoinbaseWalletConnector,
-} from 'vue-dapp'
+} from 'vue3-dapp-boot'
 import { ref, watch } from 'vue'
 
 const isDev = window.location.host === 'localhost:3000'

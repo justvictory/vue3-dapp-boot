@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import 'windi.css'
 import './style.css'
-import { VueDapp } from 'vue-dapp'
+import { VueDapp } from 'vue3-dapp-boot'
 
 const app = createApp(App)
 

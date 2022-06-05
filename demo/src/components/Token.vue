@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useEthers, useEthersHooks } from 'vue-dapp'
+import { useEthers, useEthersHooks } from 'vue3-dapp-boot'
 import { useToken } from '../composables/useToken'
 
 export default defineComponent({

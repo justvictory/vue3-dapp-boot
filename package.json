@@ -1,5 +1,5 @@
 {
-  "name": "vue-dapp-boot",
+  "name": "vue3-dapp-boot",
   "version": "0.0.0",
   "description": "Start your dapp project of vue3",
   "repository": "https://github.com/justvictory/vue3-dapp-boot.git",
@@ -70,12 +70,11 @@
     ]
   },
   "keywords": [
-    "vue",
     "vue3",
     "dapp",
     "web3",
     "ethereum",
-    "hook",
-    "composable"
+    "ether",
+    "hook"
   ]
 }

@@ -1,13 +1,13 @@
 import { hexValue } from 'ethers/lib/utils'
 import { NETWORK_DETAILS } from '../constants'
-import { Connector } from './connector'
+import { Connector } from './Connector'
 import {
   AddChainError,
   ProviderRpcError,
   ProviderNotFoundError,
   UserRejectedRequestError,
   SwitchChainError,
-} from './errors'
+} from './Errors'
 
 /**
  * MetaMask

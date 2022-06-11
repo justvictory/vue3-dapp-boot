@@ -34,16 +34,16 @@ export function useWallet(options: useWalletOptions = { useEthers: true }) {
     wallet.status = 'none'
 
     if (options.useEthers) {
-      const { deactivate } = useEthers()
-      deactivate()
+      const { onDeactivate } = useEthers()
+      onDeactivate()
     }
   }
 
   async function reactivate() {
-    const { activate } = useEthers()
+    const { onActivate } = useEthers()
     wallet.status = 'loading'
     try {
-      await activate(wallet.provider!)
+      await onActivate(wallet.provider!)
     } catch (err: any) {
       clearWallet()
       wallet.error = err.message
@@ -66,8 +66,8 @@ export function useWallet(options: useWalletOptions = { useEthers: true }) {
 
       if (options.useEthers) {
         wallet.status = 'loading'
-        const { activate } = useEthers()
-        await activate(wallet.provider!)
+        const { onActivate } = useEthers()
+        await onActivate(wallet.provider!)
       }
     } catch (err: any) {
       await disconnect() // will also clearWallet()

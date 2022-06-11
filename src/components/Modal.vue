@@ -67,7 +67,7 @@ export default defineComponent({
   flex-direction: column;
   min-width: 100%;
   height: 100%;
-  background-color: rgba(107, 114, 128, 0.7);
+  background-color: rgba(0, 0, 0, 0.2);
   left: 0px;
   top: 0px;
   z-index: 50;

@@ -1,4 +1,4 @@
-import { Connector } from './connector'
+import { Connector } from './Connector'
 import type WalletConnectProvider from '@walletconnect/web3-provider'
 import { getAddress, hexValue } from 'ethers/lib/utils'
 import {
@@ -7,7 +7,7 @@ import {
   SwitchChainError,
   SwitchChainNotSupportedError,
   UserRejectedRequestError,
-} from './errors'
+} from './Errors'
 
 /**
  * WalletConnect v1.0 \

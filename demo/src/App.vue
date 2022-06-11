@@ -14,15 +14,15 @@ import {
   WalletConnectConnector,
   CoinbaseWalletConnector,
 } from 'vue3-dapp-boot'
-import { ref, watch } from 'vue'
+import {onBeforeMount, ref, watch} from 'vue'
 
 const isDev = window.location.host === 'localhost:3000'
 const infuraId = isDev
   ? 'fd5dad2d869c4b20a703ea9f100333f7'
   : 'ff6a249a74e048f1b413cba715f98d07'
 
-const { open } = useBoard()
-const { wallet, disconnect, onDisconnect, onAccountsChanged, onChainChanged } =
+const { openBoard } = useBoard()
+const { wallet, connectWith, disconnect, onDisconnect, onAccountsChanged, onChainChanged } =
   useWallet()
 const { address, balance, chainId, isActivated } = useEthers()
 const { onActivated, onChanged } = useEthersHooks()
@@ -39,10 +39,12 @@ onChainChanged((chainId: any) => {
   console.log('chain changed', chainId)
 })
 
+const metamaskConnector = new MetaMaskConnector({
+  appUrl: 'http://localhost:3000',
+});
+
 const connectors = [
-  new MetaMaskConnector({
-    appUrl: 'http://localhost:3000',
-  }),
+  metamaskConnector,
   new WalletConnectConnector({
     qrcode: true,
     rpc: {
@@ -98,6 +100,11 @@ watch(selectedChainId, async (val, oldVal) => {
     console.error(e)
   }
 })
+
+// onBeforeMount(async () => {
+//   connectWith(metamaskConnector);
+// });
+
 </script>
 
 <template>
@@ -130,7 +137,7 @@ watch(selectedChainId, async (val, oldVal) => {
 
     <div class="m-4">
       <button
-        @click="isActivated ? disconnect() : open()"
+        @click="isActivated ? disconnect() : openBoard()"
         class="btn"
         :disabled="wallet.status === 'connecting'"
       >
@@ -138,10 +145,10 @@ watch(selectedChainId, async (val, oldVal) => {
           wallet.status === 'connected'
             ? 'Disconnect'
             : wallet.status === 'connecting'
-            ? 'Connecting...'
-            : wallet.status === 'loading'
-            ? 'Loading...'
-            : 'Connect'
+              ? 'Connecting...'
+              : wallet.status === 'loading'
+                ? 'Loading...'
+                : 'Connect'
         }}
       </button>
     </div>

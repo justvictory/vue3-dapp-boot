@@ -30,7 +30,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { boardOpen, close } = useBoard()
+    const { boardOpen, closeBoard } = useBoard()
     const { connectWith, wallet } = useWallet()
 
     const walletItemClass = computed(() =>
@@ -45,19 +45,19 @@ export default defineComponent({
       connectors,
       walletItemClass,
       connectWith,
-      close,
+      closeBoard,
     }
   },
 })
 </script>
 
 <template>
-  <Modal :modalOpen="boardOpen" @close="close" :dark="dark">
+  <Modal :modalOpen="boardOpen" @close="closeBoard" :dark="dark">
     <div v-click-outside="close">
       <div v-for="(connector, i) in connectors" :key="connector.name">
         <div
           :class="walletItemClass"
-          @click="connectWith(connector) && close()"
+          @click="connectWith(connector) && closeBoard()"
         >
           <div class="item">
             <MetaMaskIcon v-if="connector.name === 'metaMask'" class="logo" />
@@ -86,12 +86,12 @@ export default defineComponent({
   </Modal>
 
   <slot name="connecting">
-    <Modal :modalOpen="wallet.status === 'connecting'" :dark="dark">
-      <div class="loading-modal" v-if="wallet.status === 'connecting'">
-        <p>Connecting...</p>
-        <p class="mt-4">Approve or reject request using your wallet</p>
-      </div>
-    </Modal>
+<!--    <Modal :modalOpen="wallet.status === 'connecting'" :dark="dark">-->
+<!--      <div class="loading-modal" v-if="wallet.status === 'connecting'">-->
+<!--        <p>Connecting...</p>-->
+<!--        <p class="mt-4">Approve or reject request using your wallet</p>-->
+<!--      </div>-->
+<!--    </Modal>-->
   </slot>
 
   <slot name="loading">

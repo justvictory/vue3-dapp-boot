@@ -3,16 +3,16 @@ import { ref } from 'vue'
 const boardOpen = ref(false)
 
 export function useBoard() {
-  const open = () => {
+  const openBoard = () => {
     boardOpen.value = true
   }
-  const close = () => {
+  const closeBoard = () => {
     boardOpen.value = false
   }
 
   return {
     boardOpen,
-    open,
-    close,
+    openBoard,
+    closeBoard,
   }
 }

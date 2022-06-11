@@ -4,7 +4,7 @@ export const clickOutside = {
       event.stopPropagation()
 
       if (event.target !== el && !el.contains(event.target)) {
-        binding.value(event)
+        binding && binding.value(event)
       }
     }
     const clickHandler =

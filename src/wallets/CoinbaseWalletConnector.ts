@@ -1,4 +1,4 @@
-import { Connector } from './connector'
+import { Connector } from './Connector'
 import CoinbaseWalletSDK from '@coinbase/wallet-sdk'
 import type { CoinbaseWalletProvider } from '@coinbase/wallet-sdk'
 import type { CoinbaseWalletSDKOptions } from '@coinbase/wallet-sdk/dist/CoinbaseWalletSDK'
@@ -9,7 +9,7 @@ import {
   ProviderRpcError,
   SwitchChainError,
   UserRejectedRequestError,
-} from './errors'
+} from './Errors'
 
 /**
  * Coinbase Wallet SDK

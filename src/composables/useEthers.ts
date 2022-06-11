@@ -15,7 +15,7 @@ const network = ref<Network | null>(null)
 const address = ref('')
 const balance = ref<bigint>(BigInt(0))
 
-const deactivate = () => {
+const onDeactivate = () => {
   isActivated.value = false
   provider.value = null
   signer.value = null
@@ -24,7 +24,7 @@ const deactivate = () => {
   balance.value = BigInt(0)
 }
 
-async function activate(externalProvider: ExternalProvider) {
+async function onActivate(externalProvider: ExternalProvider) {
   if (!externalProvider)
     throw new Error('Failed to activate ethers: provider not found')
 
@@ -94,7 +94,7 @@ export function useEthers() {
     chainId,
 
     // methods
-    activate,
-    deactivate,
+    onActivate,
+    onDeactivate,
   }
 }

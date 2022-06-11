@@ -3,6 +3,8 @@ import { providers } from 'ethers'
 import { Connector } from '../wallets'
 import { useEthers } from './useEthers'
 
+const { onActivate, onDeactivate } = useEthers()
+
 export type ConnectionStatus = 'none' | 'connecting' | 'loading' | 'connected'
 
 const wallet = reactive({
@@ -34,13 +36,11 @@ export function useWallet(options: useWalletOptions = { useEthers: true }) {
     wallet.status = 'none'
 
     if (options.useEthers) {
-      const { onDeactivate } = useEthers()
       onDeactivate()
     }
   }
 
   async function reactivate() {
-    const { onActivate } = useEthers()
     wallet.status = 'loading'
     try {
       await onActivate(wallet.provider!)
@@ -66,7 +66,6 @@ export function useWallet(options: useWalletOptions = { useEthers: true }) {
 
       if (options.useEthers) {
         wallet.status = 'loading'
-        const { onActivate } = useEthers()
         await onActivate(wallet.provider!)
       }
     } catch (err: any) {
@@ -144,11 +143,11 @@ export function useWallet(options: useWalletOptions = { useEthers: true }) {
   return {
     wallet,
 
-    connectWith,
-    disconnect,
+    connectWithWallet: connectWith,
+    disconnectWallet: disconnect,
 
-    onDisconnect,
-    onAccountsChanged,
-    onChainChanged,
+    onDisconnectWallet: onDisconnect,
+    onAccountsChangedWallet: onAccountsChanged,
+    onChainChangedWallet: onChainChanged,
   }
 }

@@ -46,14 +46,19 @@ export function useEthersHooks() {
     }
   })
 
-  const onActivated = (hook: OnActivatedHook) => (onActivatedHook.value = hook)
-  const onChanged = (hook: OnChangedHook) => (onChangedHook.value = hook)
-  const onDeactivated = (hook: OnDeactivatedHook) =>
-    (onDeactivatedHook.value = hook)
+  const onActivated = (hook: OnActivatedHook) => {
+    onActivatedHook.value = hook
+  }
+  const onChanged = (hook: OnChangedHook) => {
+    onChangedHook.value = hook
+  }
+  const onDeactivated = (hook: OnDeactivatedHook) => {
+    onDeactivatedHook.value = hook
+  }
 
   return {
-    onActivated,
-    onDeactivated,
-    onChanged,
+    onProviderActivated: onActivated,
+    onProviderDeactivated: onDeactivated,
+    onProviderChanged: onChanged,
   }
 }

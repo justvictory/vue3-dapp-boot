@@ -31,7 +31,7 @@ export default defineComponent({
   },
   setup(props) {
     const { boardOpen, closeBoard } = useBoard()
-    const { connectWith, wallet } = useWallet()
+    const { connectWithWallet, wallet } = useWallet()
 
     const walletItemClass = computed(() =>
       props.dark ? 'wallet-item--dark' : 'wallet-item',
@@ -44,7 +44,7 @@ export default defineComponent({
       wallet,
       connectors,
       walletItemClass,
-      connectWith,
+      connectWithWallet,
       closeBoard,
     }
   },
@@ -53,11 +53,11 @@ export default defineComponent({
 
 <template>
   <Modal :modalOpen="boardOpen" @close="closeBoard" :dark="dark">
-    <div v-click-outside="close">
+    <div v-click-outside="closeBoard">
       <div v-for="(connector, i) in connectors" :key="connector.name">
         <div
           :class="walletItemClass"
-          @click="connectWith(connector) && closeBoard()"
+          @click="connectWithWallet(connector) && closeBoard()"
         >
           <div class="item">
             <MetaMaskIcon v-if="connector.name === 'metaMask'" class="logo" />
@@ -95,7 +95,7 @@ export default defineComponent({
   </slot>
 
   <slot name="loading">
-    <Modal :modalOpen="wallet.status === 'loading'" :dark="dark"></Modal>
+<!--    <Modal :modalOpen="wallet.status === 'loading'" :dark="dark"></Modal>-->
   </slot>
 </template>
 

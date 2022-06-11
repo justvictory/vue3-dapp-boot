@@ -8,6 +8,8 @@ import { BigNumber, Signer } from 'ethers'
 
 export type { Web3Provider, Signer, Network }
 
+export const DEFAULT_FETCHING_WALLET_DATA = 10000;
+
 const isActivated = ref(false)
 const provider = ref<Web3Provider | null>(null)
 const signer = ref<Signer | null>(null)
@@ -47,7 +49,7 @@ async function onActivate(externalProvider: ExternalProvider) {
   let _network = null
   let _address = ''
   let _balance = BigNumber.from(0)
-  const getData = (timeout: number = 5000) => {
+  const getData = (timeout: number = DEFAULT_FETCHING_WALLET_DATA) => {
     return new Promise(async (resolve: (val: any[]) => void, reject) => {
       try {
         setTimeout(() => {

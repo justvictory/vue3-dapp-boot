@@ -22,26 +22,30 @@ const infuraId = isDev
   : 'ff6a249a74e048f1b413cba715f98d07'
 
 const { openBoard } = useBoard()
-const { wallet, connectWith, disconnect, onDisconnect, onAccountsChanged, onChainChanged } =
-  useWallet()
+const {
+  wallet,
+  connectWithWallet,
+  disconnectWallet,
+  onDisconnectWallet,
+  onAccountsChangedWallet,
+  onChainChangedWallet
+} = useWallet();
 const { address, balance, chainId, isActivated } = useEthers()
-const { onActivated, onChanged } = useEthersHooks()
+const { onProviderActivated, onProviderChanged, onProviderDeactivated } = useEthersHooks()
 
-onDisconnect(() => {
+onDisconnectWallet(() => {
   console.log('disconnect')
 })
 
-onAccountsChanged(() => {
+onAccountsChangedWallet(() => {
   console.log('accounts changed')
 })
 
-onChainChanged((chainId: any) => {
+onChainChangedWallet((chainId: any) => {
   console.log('chain changed', chainId)
 })
 
-const metamaskConnector = new MetaMaskConnector({
-  appUrl: 'http://localhost:3000',
-});
+const metamaskConnector = new MetaMaskConnector();
 
 const connectors = [
   metamaskConnector,
@@ -60,6 +64,7 @@ const connectors = [
 
 const supportedChainId = [
   ChainId.Mainnet,
+  ChainId.Ropsten,
   ChainId.Rinkeby,
   ChainId.Arbitrum,
   ChainId.Rinkarby,
@@ -67,12 +72,12 @@ const supportedChainId = [
 ]
 const selectedChainId = ref(0)
 
-onActivated(() => {
+onProviderActivated((hook) => {
   selectedChainId.value = chainId.value as number
 })
 
 const isChainChanged = ref(false)
-onChanged(() => {
+onProviderChanged((hook) => {
   selectedChainId.value = chainId.value as number
   isChainChanged.value = true
 })
@@ -137,7 +142,7 @@ watch(selectedChainId, async (val, oldVal) => {
 
     <div class="m-4">
       <button
-        @click="isActivated ? disconnect() : openBoard()"
+        @click="isActivated ? disconnectWallet() : openBoard()"
         class="btn"
         :disabled="wallet.status === 'connecting'"
       >

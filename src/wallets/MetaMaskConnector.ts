@@ -78,9 +78,8 @@ export class MetaMaskConnector extends Connector<
 
     this.#provider = provider
 
-    const accounts = await this.#provider.request({
+    const accounts = await provider.request({
       method: 'eth_requestAccounts',
-      params: [{ eth_accounts: {} }],
     })
     const account = accounts[0]
 

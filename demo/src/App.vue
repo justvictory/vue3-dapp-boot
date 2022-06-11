@@ -13,13 +13,14 @@ import {
   MetaMaskConnector,
   WalletConnectConnector,
   CoinbaseWalletConnector,
+  ConnectionStatus
 } from 'vue3-dapp-boot'
 import {onBeforeMount, ref, watch} from 'vue'
 
 const isDev = window.location.host === 'localhost:3000'
 const infuraId = isDev
-  ? 'fd5dad2d869c4b20a703ea9f100333f7'
-  : 'ff6a249a74e048f1b413cba715f98d07'
+  ? '863c34ed0c4040409f4f61fecd08491e'
+  : '863c34ed0c4040409f4f61fecd08491e'
 
 const { openBoard } = useBoard()
 const {
@@ -144,14 +145,14 @@ watch(selectedChainId, async (val, oldVal) => {
       <button
         @click="isActivated ? disconnectWallet() : openBoard()"
         class="btn"
-        :disabled="wallet.status === 'connecting'"
+        :disabled="wallet.status === ConnectionStatus.CONNECTING"
       >
         {{
-          wallet.status === 'connected'
+          wallet.status === ConnectionStatus.CONNECTED
             ? 'Disconnect'
-            : wallet.status === 'connecting'
+            : wallet.status === ConnectionStatus.CONNECTING
               ? 'Connecting...'
-              : wallet.status === 'loading'
+              : wallet.status === ConnectionStatus.LOADING
                 ? 'Loading...'
                 : 'Connect'
         }}
@@ -161,7 +162,7 @@ watch(selectedChainId, async (val, oldVal) => {
 
   <vd-board :connectors="connectors" dark>
     <!-- <template #loading>
-      <div v-if="wallet.status === 'loading'"></div>
+      <div v-if="wallet.status === ConnectionStatus.LOADING"></div>
     </template> -->
   </vd-board>
 </template>

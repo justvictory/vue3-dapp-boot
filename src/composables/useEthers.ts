@@ -8,7 +8,7 @@ import { BigNumber, Signer } from 'ethers'
 
 export type { Web3Provider, Signer, Network }
 
-export const DEFAULT_FETCHING_WALLET_DATA = 10000;
+export const DEFAULT_FETCHING_WALLET_DATA = 10000
 
 const isActivated = ref(false)
 const provider = ref<Web3Provider | null>(null)

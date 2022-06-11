@@ -5,13 +5,19 @@ import { useEthers } from './useEthers'
 
 const { onActivate, onDeactivate } = useEthers()
 
-export type ConnectionStatus = 'none' | 'connecting' | 'loading' | 'connected'
+// export type ConnectionStatus = 'none' | 'connecting' | 'loading' | 'connected'
+export enum ConnectionStatus {
+  NONE,
+  CONNECTING,
+  LOADING,
+  CONNECTED,
+}
 
 const wallet = reactive({
   connector: null as Connector | null,
   provider: null as providers.ExternalProvider | null,
   error: '',
-  status: 'none' as ConnectionStatus,
+  status: ConnectionStatus.NONE,
 })
 
 export type OnDisconnectCallback = (...args: any[]) => void
@@ -33,7 +39,7 @@ export function useWallet(options: useWalletOptions = { useEthers: true }) {
     wallet.connector = null
     wallet.provider = null
     wallet.error = ''
-    wallet.status = 'none'
+    wallet.status = ConnectionStatus.NONE
 
     if (options.useEthers) {
       onDeactivate()
@@ -41,7 +47,7 @@ export function useWallet(options: useWalletOptions = { useEthers: true }) {
   }
 
   async function reactivate() {
-    wallet.status = 'loading'
+    wallet.status = ConnectionStatus.LOADING
     try {
       await onActivate(wallet.provider!)
     } catch (err: any) {
@@ -49,11 +55,11 @@ export function useWallet(options: useWalletOptions = { useEthers: true }) {
       wallet.error = err.message
       throw new Error(err)
     }
-    wallet.status = 'connected'
+    wallet.status = ConnectionStatus.CONNECTED
   }
 
   async function connectWith(connector: Connector) {
-    wallet.status = 'connecting'
+    wallet.status = ConnectionStatus.CONNECTING
     wallet.error = ''
 
     try {
@@ -65,7 +71,7 @@ export function useWallet(options: useWalletOptions = { useEthers: true }) {
       wallet.provider = markRaw(provider)
 
       if (options.useEthers) {
-        wallet.status = 'loading'
+        wallet.status = ConnectionStatus.LOADING
         await onActivate(wallet.provider!)
       }
     } catch (err: any) {
@@ -74,7 +80,7 @@ export function useWallet(options: useWalletOptions = { useEthers: true }) {
       throw new Error(err)
     }
 
-    wallet.status = 'connected'
+    wallet.status = ConnectionStatus.CONNECTED
 
     // subscribe events
     if (wallet.connector) {

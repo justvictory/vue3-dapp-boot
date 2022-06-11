@@ -11,6 +11,16 @@ export enum ChainId {
   Polygon = 137,
 }
 
+export const DEFAULT_INFURA_ID = '863c34ed0c4040409f4f61fecd08491e';
+
+export const CONFIG_RPC_FOR_INFURA_IDS = {
+  [ChainId.Mainnet]: `https://mainnet.infura.io/v3/${DEFAULT_INFURA_ID}`,
+  [ChainId.Ropsten]: `https://ropsten.infura.io/v3/${DEFAULT_INFURA_ID}`,
+  [ChainId.Rinkeby]: `https://rinkeby.infura.io/v3/${DEFAULT_INFURA_ID}`,
+  [ChainId.Goerli]: `https://goerli.infura.io/v3/${DEFAULT_INFURA_ID}`,
+  [ChainId.Kovan]: `https://kovan.infura.io/v3/${DEFAULT_INFURA_ID}`,
+}
+
 export const CHAIN_NAMES = {
   [ChainId.Hardhat]: 'Hardhat',
   [ChainId.Mainnet]: 'Mainnet',

@@ -25,6 +25,14 @@ declare enum ChainId {
     Arbitrum = 42161,
     Polygon = 137
 }
+declare const DEFAULT_INFURA_ID = "863c34ed0c4040409f4f61fecd08491e";
+declare const CONFIG_RPC_FOR_INFURA_IDS: {
+    1: string;
+    3: string;
+    4: string;
+    5: string;
+    42: string;
+};
 declare const CHAIN_NAMES: {
     31337: string;
     1: string;
@@ -1721,4 +1729,4 @@ declare function checkChainId(chainId: number): boolean;
 
 declare const VueDapp: Plugin;
 
-export { AddChainError, AddEthereumChainParameter, CHAIN_NAMES, ChainId, CoinbaseWalletConnector, CoinbaseWalletConnectorOptions, ConnectionStatus, Connector, ConnectorData, ConnectorNotFoundError, ContractCall, DEFAULT_FETCHING_WALLET_DATA, ERC20, ERC20Interface, EthersHooksContext, ICoinbaseWalletProvider, IWalletConnectProvider, Multicall2$1 as MULTICALL2_ABI, MULTICALL2_ADDRESS, MetaMaskConnector, MetaMaskConnectorOptions, MetaMaskEthereumProvider, MetaMaskProvider, NETWORK_DETAILS, OnAccountsChangedCallback, OnActivatedHook, OnChainChangedCallback, OnChangedHook, OnDeactivatedHook, OnDisconnectCallback, ProviderNotFoundError, ProviderRpcError, RpcError, SwitchChainError, SwitchChainNotSupportedError, UserRejectedRequestError, VueDapp, WalletConnectConnector, WalletConnectOptions, Window, checkChainId, checkInfuraId, displayChainName, displayEther, shortenAddress, useBoard, useEthers, useEthersHooks, useMulticall, useWallet, useWalletOptions };
+export { AddChainError, AddEthereumChainParameter, CHAIN_NAMES, CONFIG_RPC_FOR_INFURA_IDS, ChainId, CoinbaseWalletConnector, CoinbaseWalletConnectorOptions, ConnectionStatus, Connector, ConnectorData, ConnectorNotFoundError, ContractCall, DEFAULT_FETCHING_WALLET_DATA, DEFAULT_INFURA_ID, ERC20, ERC20Interface, EthersHooksContext, ICoinbaseWalletProvider, IWalletConnectProvider, Multicall2$1 as MULTICALL2_ABI, MULTICALL2_ADDRESS, MetaMaskConnector, MetaMaskConnectorOptions, MetaMaskEthereumProvider, MetaMaskProvider, NETWORK_DETAILS, OnAccountsChangedCallback, OnActivatedHook, OnChainChangedCallback, OnChangedHook, OnDeactivatedHook, OnDisconnectCallback, ProviderNotFoundError, ProviderRpcError, RpcError, SwitchChainError, SwitchChainNotSupportedError, UserRejectedRequestError, VueDapp, WalletConnectConnector, WalletConnectOptions, Window, checkChainId, checkInfuraId, displayChainName, displayEther, shortenAddress, useBoard, useEthers, useEthersHooks, useMulticall, useWallet, useWalletOptions };

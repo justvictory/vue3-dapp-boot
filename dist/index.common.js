@@ -45,6 +45,14 @@ exports.ChainId = void 0;
     ChainId[ChainId["Arbitrum"] = 42161] = "Arbitrum";
     ChainId[ChainId["Polygon"] = 137] = "Polygon";
 })(exports.ChainId || (exports.ChainId = {}));
+const DEFAULT_INFURA_ID = '863c34ed0c4040409f4f61fecd08491e';
+const CONFIG_RPC_FOR_INFURA_IDS = {
+    [exports.ChainId.Mainnet]: `https://mainnet.infura.io/v3/${DEFAULT_INFURA_ID}`,
+    [exports.ChainId.Ropsten]: `https://ropsten.infura.io/v3/${DEFAULT_INFURA_ID}`,
+    [exports.ChainId.Rinkeby]: `https://rinkeby.infura.io/v3/${DEFAULT_INFURA_ID}`,
+    [exports.ChainId.Goerli]: `https://goerli.infura.io/v3/${DEFAULT_INFURA_ID}`,
+    [exports.ChainId.Kovan]: `https://kovan.infura.io/v3/${DEFAULT_INFURA_ID}`,
+};
 const CHAIN_NAMES = {
     [exports.ChainId.Hardhat]: 'Hardhat',
     [exports.ChainId.Mainnet]: 'Mainnet',
@@ -1913,10 +1921,12 @@ const VueDapp = {
 
 exports.AddChainError = AddChainError;
 exports.CHAIN_NAMES = CHAIN_NAMES;
+exports.CONFIG_RPC_FOR_INFURA_IDS = CONFIG_RPC_FOR_INFURA_IDS;
 exports.CoinbaseWalletConnector = CoinbaseWalletConnector;
 exports.Connector = Connector;
 exports.ConnectorNotFoundError = ConnectorNotFoundError;
 exports.DEFAULT_FETCHING_WALLET_DATA = DEFAULT_FETCHING_WALLET_DATA;
+exports.DEFAULT_INFURA_ID = DEFAULT_INFURA_ID;
 exports.ERC20 = ERC20;
 exports.ERC20Interface = ERC20Interface;
 exports.MULTICALL2_ABI = MULTICALL2_ABI;

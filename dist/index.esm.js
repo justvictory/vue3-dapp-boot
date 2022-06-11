@@ -19,6 +19,14 @@ var ChainId;
     ChainId[ChainId["Arbitrum"] = 42161] = "Arbitrum";
     ChainId[ChainId["Polygon"] = 137] = "Polygon";
 })(ChainId || (ChainId = {}));
+const DEFAULT_INFURA_ID = '863c34ed0c4040409f4f61fecd08491e';
+const CONFIG_RPC_FOR_INFURA_IDS = {
+    [ChainId.Mainnet]: `https://mainnet.infura.io/v3/${DEFAULT_INFURA_ID}`,
+    [ChainId.Ropsten]: `https://ropsten.infura.io/v3/${DEFAULT_INFURA_ID}`,
+    [ChainId.Rinkeby]: `https://rinkeby.infura.io/v3/${DEFAULT_INFURA_ID}`,
+    [ChainId.Goerli]: `https://goerli.infura.io/v3/${DEFAULT_INFURA_ID}`,
+    [ChainId.Kovan]: `https://kovan.infura.io/v3/${DEFAULT_INFURA_ID}`,
+};
 const CHAIN_NAMES = {
     [ChainId.Hardhat]: 'Hardhat',
     [ChainId.Mainnet]: 'Mainnet',
@@ -1885,4 +1893,4 @@ const VueDapp = {
     },
 };
 
-export { AddChainError, CHAIN_NAMES, ChainId, CoinbaseWalletConnector, ConnectionStatus, Connector, ConnectorNotFoundError, DEFAULT_FETCHING_WALLET_DATA, ERC20, ERC20Interface, MULTICALL2_ABI, MULTICALL2_ADDRESS, MetaMaskConnector, NETWORK_DETAILS, ProviderNotFoundError, ProviderRpcError, RpcError, SwitchChainError, SwitchChainNotSupportedError, UserRejectedRequestError, VueDapp, WalletConnectConnector, checkChainId, checkInfuraId, displayChainName, displayEther, shortenAddress, useBoard, useEthers, useEthersHooks, useMulticall, useWallet };
+export { AddChainError, CHAIN_NAMES, CONFIG_RPC_FOR_INFURA_IDS, ChainId, CoinbaseWalletConnector, ConnectionStatus, Connector, ConnectorNotFoundError, DEFAULT_FETCHING_WALLET_DATA, DEFAULT_INFURA_ID, ERC20, ERC20Interface, MULTICALL2_ABI, MULTICALL2_ADDRESS, MetaMaskConnector, NETWORK_DETAILS, ProviderNotFoundError, ProviderRpcError, RpcError, SwitchChainError, SwitchChainNotSupportedError, UserRejectedRequestError, VueDapp, WalletConnectConnector, checkChainId, checkInfuraId, displayChainName, displayEther, shortenAddress, useBoard, useEthers, useEthersHooks, useMulticall, useWallet };

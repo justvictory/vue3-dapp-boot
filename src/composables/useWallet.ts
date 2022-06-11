@@ -58,7 +58,7 @@ export function useWallet(options: useWalletOptions = { useEthers: true }) {
     wallet.status = ConnectionStatus.CONNECTED
   }
 
-  async function connectWith(connector: Connector) {
+  async function connectWithWallet(connector: Connector) {
     wallet.status = ConnectionStatus.CONNECTING
     wallet.error = ''
 
@@ -75,7 +75,7 @@ export function useWallet(options: useWalletOptions = { useEthers: true }) {
         await onActivate(wallet.provider!)
       }
     } catch (err: any) {
-      await disconnect() // will also clearWallet()
+      await disconnectWallet() // will also clearWallet()
       wallet.error = err.message
       throw new Error(err)
     }
@@ -97,7 +97,7 @@ export function useWallet(options: useWalletOptions = { useEthers: true }) {
         if (wallet.connector?.name === 'metaMask') {
           return
         }
-        disconnect()
+        disconnectWallet()
       })
     }
 
@@ -122,7 +122,7 @@ export function useWallet(options: useWalletOptions = { useEthers: true }) {
     }
   }
 
-  async function disconnect() {
+  async function disconnectWallet() {
     if (wallet.connector) {
       try {
         await wallet.connector.disconnect()
@@ -134,26 +134,26 @@ export function useWallet(options: useWalletOptions = { useEthers: true }) {
     clearWallet()
   }
 
-  function onDisconnect(callback: OnDisconnectCallback) {
+  function onDisconnectWallet(callback: OnDisconnectCallback) {
     callbacks.onDisconnectCallback = callback
   }
 
-  function onAccountsChanged(callback: OnAccountsChangedCallback) {
+  function onAccountsChangedWallet(callback: OnAccountsChangedCallback) {
     callbacks.onAccountsChangedCallback = callback
   }
 
-  function onChainChanged(callback: OnChainChangedCallback) {
+  function onChainChangedWallet(callback: OnChainChangedCallback) {
     callbacks.onChainChangedCallback = callback
   }
 
   return {
     wallet,
 
-    connectWithWallet: connectWith,
-    disconnectWallet: disconnect,
+    connectWithWallet,
+    disconnectWallet,
 
-    onDisconnectWallet: onDisconnect,
-    onAccountsChangedWallet: onAccountsChanged,
-    onChainChangedWallet: onChainChanged,
+    onDisconnectWallet,
+    onAccountsChangedWallet,
+    onChainChangedWallet,
   }
 }

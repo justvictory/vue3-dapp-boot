@@ -829,7 +829,7 @@ function useWallet(options = { useEthers: true }) {
             wallet.status = ConnectionStatus.CONNECTED;
         });
     }
-    function connectWith(connector) {
+    function connectWithWallet(connector) {
         return __awaiter(this, void 0, void 0, function* () {
             wallet.status = ConnectionStatus.CONNECTING;
             wallet.error = '';
@@ -845,7 +845,7 @@ function useWallet(options = { useEthers: true }) {
                 }
             }
             catch (err) {
-                yield disconnect(); // will also clearWallet()
+                yield disconnectWallet(); // will also clearWallet()
                 wallet.error = err.message;
                 throw new Error(err);
             }
@@ -866,7 +866,7 @@ function useWallet(options = { useEthers: true }) {
                     if (((_a = wallet.connector) === null || _a === void 0 ? void 0 : _a.name) === 'metaMask') {
                         return;
                     }
-                    disconnect();
+                    disconnectWallet();
                 });
             }
             if (wallet.connector) {
@@ -889,7 +889,7 @@ function useWallet(options = { useEthers: true }) {
             }
         });
     }
-    function disconnect() {
+    function disconnectWallet() {
         return __awaiter(this, void 0, void 0, function* () {
             if (wallet.connector) {
                 try {
@@ -903,22 +903,22 @@ function useWallet(options = { useEthers: true }) {
             clearWallet();
         });
     }
-    function onDisconnect(callback) {
+    function onDisconnectWallet(callback) {
         callbacks.onDisconnectCallback = callback;
     }
-    function onAccountsChanged(callback) {
+    function onAccountsChangedWallet(callback) {
         callbacks.onAccountsChangedCallback = callback;
     }
-    function onChainChanged(callback) {
+    function onChainChangedWallet(callback) {
         callbacks.onChainChangedCallback = callback;
     }
     return {
         wallet,
-        connectWithWallet: connectWith,
-        disconnectWallet: disconnect,
-        onDisconnectWallet: onDisconnect,
-        onAccountsChangedWallet: onAccountsChanged,
-        onChainChangedWallet: onChainChanged,
+        connectWithWallet,
+        disconnectWallet,
+        onDisconnectWallet,
+        onAccountsChangedWallet,
+        onChainChangedWallet,
     };
 }
 

@@ -16,6 +16,7 @@ export enum ConnectionStatus {
 const wallet = reactive({
   connector: null as Connector | null,
   provider: null as providers.ExternalProvider | null,
+  code: 0,
   error: '',
   status: ConnectionStatus.NONE,
 })
@@ -38,6 +39,7 @@ export function useWallet(options: useWalletOptions = { useEthers: true }) {
   const clearWallet = () => {
     wallet.connector = null
     wallet.provider = null
+    wallet.code = 0;
     wallet.error = ''
     wallet.status = ConnectionStatus.NONE
 
@@ -52,6 +54,7 @@ export function useWallet(options: useWalletOptions = { useEthers: true }) {
       await onActivate(wallet.provider!)
     } catch (err: any) {
       clearWallet()
+      wallet.code = err.code
       wallet.error = err.message
       throw new Error(err)
     }
@@ -60,6 +63,7 @@ export function useWallet(options: useWalletOptions = { useEthers: true }) {
 
   async function connectWithWallet(connector: Connector) {
     wallet.status = ConnectionStatus.CONNECTING
+    wallet.code = 0
     wallet.error = ''
 
     try {
@@ -76,6 +80,7 @@ export function useWallet(options: useWalletOptions = { useEthers: true }) {
       }
     } catch (err: any) {
       await disconnectWallet() // will also clearWallet()
+      wallet.code = err.code
       wallet.error = err.message
       throw new Error(err)
     }

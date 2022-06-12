@@ -6,13 +6,16 @@
 
 <style scoped>
 .module-loading {
-
+  text-align: center;
+}
+.module-loading >img {
+  display: inline-block;
 }
 .lds-ring {
   display: inline-block;
   position: relative;
-  width: 60px;
-  height: 60px;
+  width: 64px;
+  height: 64px;
 }
 .lds-ring div {
   box-sizing: border-box;

@@ -46,7 +46,7 @@ export default defineComponent({
 <template>
   <teleport to="body">
     <transition name="modal-animation">
-      <div v-if="modalOpen" class="modal">
+      <div v-if="modalOpen" class="modal" @click="closeModal">
         <div :class="modalInnerClass">
           <div class="modal-content">
             <!-- Modal Content -->

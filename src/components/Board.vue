@@ -2,6 +2,7 @@
 import { computed, defineComponent } from 'vue'
 import Modal from './Modal.vue'
 import Loading from './Loading.vue'
+import Error from "./Error.vue"
 import WalletConnectIcon from './logos/WalletConnect.vue'
 import MetaMaskIcon from './logos/MetaMask.vue'
 import CoinbaseWallet from './logos/CoinbaseWallet.vue'
@@ -12,6 +13,7 @@ import { ConnectionStatus } from "../composables/useWallet";
 
 export default defineComponent({
   components: {
+    Error,
     Modal,
     Loading,
     MetaMaskIcon,
@@ -40,7 +42,10 @@ export default defineComponent({
 
     const connectors = props.connectors as Connector[]
 
-
+    const closeErrorBoard = () => {
+      wallet.code = 0;
+      wallet.error = '';
+    }
 
     return {
       ConnectionStatus,
@@ -48,6 +53,7 @@ export default defineComponent({
       closeBoard,
       boardOpenConnecting,
       closeConnectingBoard,
+      closeErrorBoard,
       wallet,
       connectors,
       walletItemClass,
@@ -109,6 +115,21 @@ export default defineComponent({
       <div class="loading-modal">
         <loading />
         <p>Loading...</p>
+      </div>
+    </Modal>
+  </slot>
+
+  <slot name="error">
+    <Modal :modalOpen="!!wallet.error" :dark="dark" @close="closeErrorBoard()">
+      <div class="loading-modal">
+        <error />
+        <div v-if="wallet.code === -32002">
+          The connection attempt failed. Please login in your wallet.
+        </div>
+        <div v-else>
+          <p v-if="wallet.code">Code: {{ wallet.code }}</p>
+          <p>{{ wallet.error }}</p>
+        </div>
       </div>
     </Modal>
   </slot>
@@ -211,7 +232,7 @@ export default defineComponent({
   line-height: 1.75rem;
 }
 
-@media (min-width: 640px) {
+@media (max-width: 640px) {
   .loading-modal {
     width: auto;
   }

@@ -61,7 +61,7 @@ async function onActivate(externalProvider: ExternalProvider) {
         }, timeout)
         _network = await _provider.getNetwork()
         _address = await _signer.getAddress()
-        _avatar = jazzicon(64, parseInt(_address.slice(2, 10), 16))
+        _avatar = jazzicon(32, parseInt(_address.slice(2, 10), 16))
         // const iconNode = jazzicon(64, parseInt(_address.slice(2, 10), 16))
         // _avatar = document.createElement('div').appendChild(iconNode);
         _balance = await _signer.getBalance()

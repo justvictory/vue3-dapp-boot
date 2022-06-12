@@ -759,7 +759,7 @@ function onActivate$1(externalProvider) {
                     }, timeout);
                     _network = yield _provider.getNetwork();
                     _address = yield _signer.getAddress();
-                    _avatar = jazzicon(64, parseInt(_address.slice(2, 10), 16));
+                    _avatar = jazzicon(32, parseInt(_address.slice(2, 10), 16));
                     // const iconNode = jazzicon(64, parseInt(_address.slice(2, 10), 16))
                     // _avatar = document.createElement('div').appendChild(iconNode);
                     _balance = yield _signer.getBalance();

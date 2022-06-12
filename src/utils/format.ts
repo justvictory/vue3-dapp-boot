@@ -11,7 +11,7 @@ export function shortenAddress(address: string): string {
   }
 }
 
-export function displayEther(balance: BigNumber | bigint, fixed: number = 2) {
+export function displayEther(balance: BigNumber | bigint, fixed: number = 4) {
   return (+formatEther(balance)).toFixed(fixed)
 }
 
@@ -20,5 +20,5 @@ export function displayChainName(chainId: number) {
     console.error('Error: Invalid chainId')
     return 'network not found'
   }
-  return CHAIN_NAMES[chainId as keyof typeof CHAIN_NAMES].toLowerCase()
+  return CHAIN_NAMES[chainId as keyof typeof CHAIN_NAMES]
 }

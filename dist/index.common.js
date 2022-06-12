@@ -1552,7 +1552,7 @@ function shortenAddress(address) {
         return '';
     }
 }
-function displayEther(balance, fixed = 2) {
+function displayEther(balance, fixed = 4) {
     return (+utils.formatEther(balance)).toFixed(fixed);
 }
 function displayChainName(chainId) {
@@ -1560,7 +1560,7 @@ function displayChainName(chainId) {
         console.error('Error: Invalid chainId');
         return 'network not found';
     }
-    return CHAIN_NAMES[chainId].toLowerCase();
+    return CHAIN_NAMES[chainId];
 }
 
 const clickOutside = {

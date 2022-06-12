@@ -1,18 +1,19 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import Modal from './Modal.vue'
-import Loader from './Loader.vue'
+import Loading from './Loading.vue'
 import WalletConnectIcon from './logos/WalletConnect.vue'
 import MetaMaskIcon from './logos/MetaMask.vue'
 import CoinbaseWallet from './logos/CoinbaseWallet.vue'
 import { useBoard } from '../composables/useBoard'
 import { useWallet } from '../composables/useWallet'
 import { Connector } from '../wallets'
+import { ConnectionStatus } from "../composables/useWallet";
 
 export default defineComponent({
   components: {
     Modal,
-    Loader,
+    Loading,
     MetaMaskIcon,
     WalletConnectIcon,
     CoinbaseWallet,
@@ -30,7 +31,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { boardOpen, closeBoard } = useBoard()
+    const { boardOpen, closeBoard, boardOpenConnecting, closeConnectingBoard } = useBoard()
     const { connectWithWallet, wallet } = useWallet()
 
     const walletItemClass = computed(() =>
@@ -39,13 +40,18 @@ export default defineComponent({
 
     const connectors = props.connectors as Connector[]
 
+
+
     return {
+      ConnectionStatus,
       boardOpen,
+      closeBoard,
+      boardOpenConnecting,
+      closeConnectingBoard,
       wallet,
       connectors,
       walletItemClass,
       connectWithWallet,
-      closeBoard,
     }
   },
 })
@@ -86,16 +92,25 @@ export default defineComponent({
   </Modal>
 
   <slot name="connecting">
-<!--    <Modal :modalOpen="wallet.status === 'connecting'" :dark="dark">-->
-<!--      <div class="loading-modal" v-if="wallet.status === 'connecting'">-->
-<!--        <p>Connecting...</p>-->
-<!--        <p class="mt-4">Approve or reject request using your wallet</p>-->
-<!--      </div>-->
-<!--    </Modal>-->
+    <Modal
+      :modalOpen="wallet.status === ConnectionStatus.CONNECTING"
+      :dark="dark"
+      @close="wallet.status = ConnectionStatus.NONE"
+    >
+      <div class="loading-modal">
+        <loading />
+        <p>Connecting...</p>
+      </div>
+    </Modal>
   </slot>
 
   <slot name="loading">
-<!--    <Modal :modalOpen="wallet.status === 'loading'" :dark="dark"></Modal>-->
+    <Modal :modalOpen="wallet.status === ConnectionStatus.LOADING" :dark="dark" @close="wallet.status = ConnectionStatus.NONE">
+      <div class="loading-modal">
+        <loading />
+        <p>Loading...</p>
+      </div>
+    </Modal>
   </slot>
 </template>
 

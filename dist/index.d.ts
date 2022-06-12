@@ -943,6 +943,7 @@ declare function useEthers(): {
     } | null>;
     address: Ref<string>;
     balance: Ref<bigint>;
+    avatar: Ref<HTMLDivElement | null>;
     chainId: vue.ComputedRef<number | undefined>;
     onActivate: typeof onActivate;
     onDeactivate: () => void;

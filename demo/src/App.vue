@@ -31,7 +31,7 @@ const {
   onAccountsChangedWallet,
   onChainChangedWallet
 } = useWallet();
-const { address, balance, chainId, isActivated } = useEthers()
+const { address, balance, chainId, isActivated, avatar } = useEthers()
 const { onProviderActivated, onProviderChanged, onProviderDeactivated } = useEthersHooks()
 
 onDisconnectWallet(() => {
@@ -133,6 +133,7 @@ watch(selectedChainId, async (val, oldVal) => {
     <div v-if="isActivated" class="text-center">
       <p>{{ shortenAddress(address) }}</p>
       <p>{{ displayEther(balance) }} ETH</p>
+      <div v-html="avatar.outerHTML"></div>
 
       <!-- Network -->
       <Dropdown

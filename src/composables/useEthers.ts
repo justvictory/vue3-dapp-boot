@@ -5,6 +5,7 @@ import {
   ExternalProvider,
 } from '@ethersproject/providers'
 import { BigNumber, Signer } from 'ethers'
+import jazzicon from '@metamask/jazzicon'
 
 export type { Web3Provider, Signer, Network }
 
@@ -16,6 +17,7 @@ const signer = ref<Signer | null>(null)
 const network = ref<Network | null>(null)
 const address = ref('')
 const balance = ref<bigint>(BigInt(0))
+const avatar = ref<HTMLDivElement | null>(null)
 
 const onDeactivate = () => {
   isActivated.value = false
@@ -24,6 +26,7 @@ const onDeactivate = () => {
   network.value = null
   address.value = ''
   balance.value = BigInt(0)
+  avatar.value = null;
 }
 
 async function onActivate(externalProvider: ExternalProvider) {
@@ -49,6 +52,7 @@ async function onActivate(externalProvider: ExternalProvider) {
   let _network = null
   let _address = ''
   let _balance = BigNumber.from(0)
+  let _avatar = null;
   const getData = (timeout: number = DEFAULT_FETCHING_WALLET_DATA) => {
     return new Promise(async (resolve: (val: any[]) => void, reject) => {
       try {
@@ -57,6 +61,9 @@ async function onActivate(externalProvider: ExternalProvider) {
         }, timeout)
         _network = await _provider.getNetwork()
         _address = await _signer.getAddress()
+        _avatar = jazzicon(64, parseInt(_address.slice(2, 10), 16))
+        // const iconNode = jazzicon(64, parseInt(_address.slice(2, 10), 16))
+        // _avatar = document.createElement('div').appendChild(iconNode);
         _balance = await _signer.getBalance()
         resolve([_network, _address, _balance])
       } catch (err: any) {
@@ -76,6 +83,7 @@ async function onActivate(externalProvider: ExternalProvider) {
   network.value = _network
   address.value = _address
   balance.value = _balance.toBigInt()
+  avatar.value = _avatar
 
   isActivated.value = true
 }
@@ -91,6 +99,7 @@ export function useEthers() {
     network,
     address,
     balance,
+    avatar,
 
     // getters
     chainId,

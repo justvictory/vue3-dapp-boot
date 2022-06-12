@@ -6,6 +6,7 @@ var abi$1 = require('@ethersproject/abi');
 var vue = require('vue');
 var providers = require('@ethersproject/providers');
 var ethers = require('ethers');
+var jazzicon = require('@metamask/jazzicon');
 var contracts = require('@ethersproject/contracts');
 var utils = require('ethers/lib/utils');
 var CoinbaseWalletSDK = require('@coinbase/wallet-sdk');
@@ -30,6 +31,7 @@ function _interopNamespace(e) {
   return Object.freeze(n);
 }
 
+var jazzicon__default = /*#__PURE__*/_interopDefaultLegacy(jazzicon);
 var CoinbaseWalletSDK__default = /*#__PURE__*/_interopDefaultLegacy(CoinbaseWalletSDK);
 
 exports.ChainId = void 0;
@@ -744,6 +746,7 @@ const signer$1 = vue.ref(null);
 const network$1 = vue.ref(null);
 const address$1 = vue.ref('');
 const balance$1 = vue.ref(BigInt(0));
+const avatar = vue.ref(null);
 const onDeactivate$1 = () => {
     isActivated.value = false;
     provider$1.value = null;
@@ -751,6 +754,7 @@ const onDeactivate$1 = () => {
     network$1.value = null;
     address$1.value = '';
     balance$1.value = BigInt(0);
+    avatar.value = null;
 };
 function onActivate$1(externalProvider) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -773,6 +777,7 @@ function onActivate$1(externalProvider) {
         let _network = null;
         let _address = '';
         let _balance = ethers.BigNumber.from(0);
+        let _avatar = null;
         const getData = (timeout = DEFAULT_FETCHING_WALLET_DATA) => {
             return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
                 try {
@@ -781,6 +786,9 @@ function onActivate$1(externalProvider) {
                     }, timeout);
                     _network = yield _provider.getNetwork();
                     _address = yield _signer.getAddress();
+                    _avatar = jazzicon__default["default"](64, parseInt(_address.slice(2, 10), 16));
+                    // const iconNode = jazzicon(64, parseInt(_address.slice(2, 10), 16))
+                    // _avatar = document.createElement('div').appendChild(iconNode);
                     _balance = yield _signer.getBalance();
                     resolve([_network, _address, _balance]);
                 }
@@ -800,6 +808,7 @@ function onActivate$1(externalProvider) {
         network$1.value = _network;
         address$1.value = _address;
         balance$1.value = _balance.toBigInt();
+        avatar.value = _avatar;
         isActivated.value = true;
     });
 }
@@ -813,6 +822,7 @@ function useEthers() {
         network: network$1,
         address: address$1,
         balance: balance$1,
+        avatar,
         // getters
         chainId,
         // methods
@@ -879,6 +889,8 @@ function useWallet(options = { useEthers: true }) {
                 const { provider } = yield connector.connect();
                 wallet.connector = vue.markRaw(connector);
                 wallet.provider = vue.markRaw(provider);
+                wallet.code = 0;
+                wallet.error = '';
                 if (options.useEthers) {
                     wallet.status = exports.ConnectionStatus.LOADING;
                     yield onActivate(wallet.provider);

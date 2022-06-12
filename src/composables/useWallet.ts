@@ -74,6 +74,9 @@ export function useWallet(options: useWalletOptions = { useEthers: true }) {
       wallet.connector = markRaw(connector)
       wallet.provider = markRaw(provider)
 
+      wallet.code = 0
+      wallet.error = ''
+
       if (options.useEthers) {
         wallet.status = ConnectionStatus.LOADING
         await onActivate(wallet.provider!)

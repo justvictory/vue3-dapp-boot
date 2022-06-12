@@ -2,6 +2,7 @@ import { Interface } from '@ethersproject/abi';
 import { ref, computed, markRaw, reactive, watch, defineComponent, openBlock, createBlock, Teleport, createVNode, Transition, withCtx, createElementBlock, createElementVNode, normalizeClass, createCommentVNode, renderSlot, pushScopeId, popScopeId, createStaticVNode, resolveComponent, resolveDirective, Fragment, withDirectives, renderList, toDisplayString } from 'vue';
 import { Web3Provider } from '@ethersproject/providers';
 import { BigNumber } from 'ethers';
+import jazzicon from '@metamask/jazzicon';
 import { Contract } from '@ethersproject/contracts';
 import { hexValue, getAddress, isAddress, formatEther } from 'ethers/lib/utils';
 import CoinbaseWalletSDK from '@coinbase/wallet-sdk';
@@ -718,6 +719,7 @@ const signer$1 = ref(null);
 const network$1 = ref(null);
 const address$1 = ref('');
 const balance$1 = ref(BigInt(0));
+const avatar = ref(null);
 const onDeactivate$1 = () => {
     isActivated.value = false;
     provider$1.value = null;
@@ -725,6 +727,7 @@ const onDeactivate$1 = () => {
     network$1.value = null;
     address$1.value = '';
     balance$1.value = BigInt(0);
+    avatar.value = null;
 };
 function onActivate$1(externalProvider) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -747,6 +750,7 @@ function onActivate$1(externalProvider) {
         let _network = null;
         let _address = '';
         let _balance = BigNumber.from(0);
+        let _avatar = null;
         const getData = (timeout = DEFAULT_FETCHING_WALLET_DATA) => {
             return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
                 try {
@@ -755,6 +759,9 @@ function onActivate$1(externalProvider) {
                     }, timeout);
                     _network = yield _provider.getNetwork();
                     _address = yield _signer.getAddress();
+                    _avatar = jazzicon(64, parseInt(_address.slice(2, 10), 16));
+                    // const iconNode = jazzicon(64, parseInt(_address.slice(2, 10), 16))
+                    // _avatar = document.createElement('div').appendChild(iconNode);
                     _balance = yield _signer.getBalance();
                     resolve([_network, _address, _balance]);
                 }
@@ -774,6 +781,7 @@ function onActivate$1(externalProvider) {
         network$1.value = _network;
         address$1.value = _address;
         balance$1.value = _balance.toBigInt();
+        avatar.value = _avatar;
         isActivated.value = true;
     });
 }
@@ -787,6 +795,7 @@ function useEthers() {
         network: network$1,
         address: address$1,
         balance: balance$1,
+        avatar,
         // getters
         chainId,
         // methods
@@ -853,6 +862,8 @@ function useWallet(options = { useEthers: true }) {
                 const { provider } = yield connector.connect();
                 wallet.connector = markRaw(connector);
                 wallet.provider = markRaw(provider);
+                wallet.code = 0;
+                wallet.error = '';
                 if (options.useEthers) {
                     wallet.status = ConnectionStatus.LOADING;
                     yield onActivate(wallet.provider);

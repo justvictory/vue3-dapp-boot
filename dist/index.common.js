@@ -1700,7 +1700,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z$3 = "\n.modal[data-v-701ac82d] {\n  position: fixed;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  min-width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.2);\n  left: 0px;\n  top: 0px;\n  z-index: 50;\n}\n.modal-inner[data-v-701ac82d] {\n  display: flex;\n  background: #ffffff;\n  border-radius: 1rem;\n  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,\n    rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,\n    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;\n}\n.modal-inner--dark[data-v-701ac82d] {\n  display: flex;\n  color: rgb(199, 199, 199);\n  background: #273138;\n  border-radius: 1rem;\n  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,\n    rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,\n    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;\n}\n.modal-animation-enter-active[data-v-701ac82d],\n.modal-animation-leave-active[data-v-701ac82d] {\n  transition: opacity 0.3s cubic-bezier(0.52, 0.02, 0.19, 1.02);\n}\n.modal-animation-enter-from[data-v-701ac82d],\n.modal-animation-leave-to[data-v-701ac82d] {\n  opacity: 0;\n}\n";
+var css_248z$3 = "\n.modal[data-v-701ac82d] {\n  position: fixed;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  min-width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.2);\n  left: 0px;\n  top: 0px;\n  z-index: 50;\n}\n.modal-inner[data-v-701ac82d] {\n  display: flex;\n  background: #ffffff;\n  border-radius: 1rem;\n  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,\n    rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,\n    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;\n}\n.modal-inner--dark[data-v-701ac82d] {\n  display: flex;\n  color: rgb(199, 199, 199);\n  background: #000;\n  border-radius: 1rem;\n  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,\n    rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,\n    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;\n}\n.modal-animation-enter-active[data-v-701ac82d],\n.modal-animation-leave-active[data-v-701ac82d] {\n  transition: opacity 0.3s cubic-bezier(0.52, 0.02, 0.19, 1.02);\n}\n.modal-animation-enter-from[data-v-701ac82d],\n.modal-animation-leave-to[data-v-701ac82d] {\n  opacity: 0;\n}\n";
 styleInject(css_248z$3);
 
 script$6.render = render$6;
@@ -1910,11 +1910,9 @@ const _hoisted_5 = { key: 5 };
 const _hoisted_6 = { class: "loading-modal" };
 const _hoisted_7 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/vue.createElementVNode("p", null, "Connecting...", -1 /* HOISTED */));
 const _hoisted_8 = { class: "loading-modal" };
-const _hoisted_9 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/vue.createElementVNode("p", null, "Loading...", -1 /* HOISTED */));
-const _hoisted_10 = { class: "loading-modal" };
+const _hoisted_9 = { key: 0 };
+const _hoisted_10 = { key: 1 };
 const _hoisted_11 = { key: 0 };
-const _hoisted_12 = { key: 1 };
-const _hoisted_13 = { key: 0 };
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_MetaMaskIcon = vue.resolveComponent("MetaMaskIcon");
@@ -2001,34 +1999,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, 8 /* PROPS */, ["modalOpen", "dark"])
     ]),
     vue.renderSlot(_ctx.$slots, "loading", {}, () => [
-      vue.createVNode(_component_Modal, {
-        modalOpen: _ctx.wallet.status === _ctx.ConnectionStatus.LOADING,
-        dark: _ctx.dark,
-        onClose: _cache[1] || (_cache[1] = $event => (_ctx.wallet.status = _ctx.ConnectionStatus.NONE))
-      }, {
-        default: vue.withCtx(() => [
-          vue.createElementVNode("div", _hoisted_8, [
-            vue.createVNode(_component_loading),
-            _hoisted_9
-          ])
-        ]),
-        _: 1 /* STABLE */
-      }, 8 /* PROPS */, ["modalOpen", "dark"])
+      vue.createCommentVNode("    <Modal :modalOpen=\"wallet.status === ConnectionStatus.LOADING\" :dark=\"dark\" @close=\"wallet.status = ConnectionStatus.NONE\">"),
+      vue.createCommentVNode("      <div class=\"loading-modal\">"),
+      vue.createCommentVNode("        <loading />"),
+      vue.createCommentVNode("        <p>Loading...</p>"),
+      vue.createCommentVNode("      </div>"),
+      vue.createCommentVNode("    </Modal>")
     ]),
     vue.renderSlot(_ctx.$slots, "error", {}, () => [
       vue.createVNode(_component_Modal, {
         modalOpen: !!_ctx.wallet.error,
         dark: _ctx.dark,
-        onClose: _cache[2] || (_cache[2] = $event => (_ctx.closeErrorBoard()))
+        onClose: _cache[1] || (_cache[1] = $event => (_ctx.closeErrorBoard()))
       }, {
         default: vue.withCtx(() => [
-          vue.createElementVNode("div", _hoisted_10, [
+          vue.createElementVNode("div", _hoisted_8, [
             vue.createVNode(_component_error),
             (_ctx.wallet.code === -32002)
-              ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_11, " The connection attempt failed. Please login in your wallet. "))
-              : (vue.openBlock(), vue.createElementBlock("div", _hoisted_12, [
+              ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_9, " The connection attempt failed. Please login in your wallet. "))
+              : (vue.openBlock(), vue.createElementBlock("div", _hoisted_10, [
                   (_ctx.wallet.code)
-                    ? (vue.openBlock(), vue.createElementBlock("p", _hoisted_13, "Code: " + vue.toDisplayString(_ctx.wallet.code), 1 /* TEXT */))
+                    ? (vue.openBlock(), vue.createElementBlock("p", _hoisted_11, "Code: " + vue.toDisplayString(_ctx.wallet.code), 1 /* TEXT */))
                     : vue.createCommentVNode("v-if", true),
                   vue.createElementVNode("p", null, vue.toDisplayString(_ctx.wallet.error), 1 /* TEXT */)
                 ]))

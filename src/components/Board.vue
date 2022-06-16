@@ -111,12 +111,12 @@ export default defineComponent({
   </slot>
 
   <slot name="loading">
-    <Modal :modalOpen="wallet.status === ConnectionStatus.LOADING" :dark="dark" @close="wallet.status = ConnectionStatus.NONE">
-      <div class="loading-modal">
-        <loading />
-        <p>Loading...</p>
-      </div>
-    </Modal>
+<!--    <Modal :modalOpen="wallet.status === ConnectionStatus.LOADING" :dark="dark" @close="wallet.status = ConnectionStatus.NONE">-->
+<!--      <div class="loading-modal">-->
+<!--        <loading />-->
+<!--        <p>Loading...</p>-->
+<!--      </div>-->
+<!--    </Modal>-->
   </slot>
 
   <slot name="error">

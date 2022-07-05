@@ -19,6 +19,7 @@ var ChainId;
     ChainId[ChainId["Rinkarby"] = 421611] = "Rinkarby";
     ChainId[ChainId["Arbitrum"] = 42161] = "Arbitrum";
     ChainId[ChainId["Polygon"] = 137] = "Polygon";
+    ChainId[ChainId["HECOTestnet"] = 256] = "HECOTestnet";
 })(ChainId || (ChainId = {}));
 const DEFAULT_INFURA_ID = '863c34ed0c4040409f4f61fecd08491e';
 const CONFIG_RPC_FOR_INFURA_IDS = {
@@ -39,6 +40,7 @@ const CHAIN_NAMES = {
     [ChainId.Rinkarby]: 'Rinkarby',
     [ChainId.Arbitrum]: 'Arbitrum',
     [ChainId.Polygon]: 'Polygon',
+    [ChainId.HECOTestnet]: 'Testnet',
 };
 // @todo add other network details. Refer to https://chainlist.org/
 const NETWORK_DETAILS = {
@@ -81,6 +83,16 @@ const NETWORK_DETAILS = {
         },
         rpcUrls: ['https://polygon-rpc.com/'],
         blockExplorerUrls: ['https://polygonscan.com/'],
+    },
+    [ChainId.HECOTestnet]: {
+        chainId: '0x' + ChainId.HECOTestnet.toString(16),
+        chainName: 'Huobi ECO Chain Testnet',
+        nativeCurrency: {
+            symbol: 'htt',
+            decimals: 18,
+        },
+        rpcUrls: ['https://http-testnet.hecochain.com'],
+        blockExplorerUrls: ['https://testnet.hecoinfo.com'],
     },
 };
 
@@ -712,7 +724,7 @@ function __classPrivateFieldSet(receiver, state, value, kind, f) {
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 }
 
-const DEFAULT_FETCHING_WALLET_DATA = 10000;
+const DEFAULT_FETCHING_WALLET_DATA = 15000;
 const isActivated = ref(false);
 const provider$1 = ref(null);
 const signer$1 = ref(null);

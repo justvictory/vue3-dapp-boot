@@ -9,7 +9,7 @@ import jazzicon from '@metamask/jazzicon'
 
 export type { Web3Provider, Signer, Network }
 
-export const DEFAULT_FETCHING_WALLET_DATA = 10000
+export const DEFAULT_FETCHING_WALLET_DATA = 15000
 
 const isActivated = ref(false)
 const provider = ref<Web3Provider | null>(null)
@@ -58,7 +58,7 @@ async function onActivate(externalProvider: ExternalProvider) {
       try {
         setTimeout(() => {
           reject('Failed to activate ethers: timeout')
-        }, timeout)
+        }, timeout);
         _network = await _provider.getNetwork()
         _address = await _signer.getAddress()
         _avatar = jazzicon(32, parseInt(_address.slice(2, 10), 16))

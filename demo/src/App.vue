@@ -72,6 +72,7 @@ const supportedChainId = [
   ChainId.Rinkeby,
   ChainId.Goerli,
   ChainId.Kovan,
+  ChainId.HECOTestnet
 ]
 const selectedChainId = ref(0)
 

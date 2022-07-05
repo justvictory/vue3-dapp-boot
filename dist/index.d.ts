@@ -23,7 +23,8 @@ declare enum ChainId {
     xDai = 100,
     Rinkarby = 421611,
     Arbitrum = 42161,
-    Polygon = 137
+    Polygon = 137,
+    HECOTestnet = 256
 }
 declare const DEFAULT_INFURA_ID = "863c34ed0c4040409f4f61fecd08491e";
 declare const CONFIG_RPC_FOR_INFURA_IDS: {
@@ -44,6 +45,7 @@ declare const CHAIN_NAMES: {
     421611: string;
     42161: string;
     137: string;
+    256: string;
 };
 declare const NETWORK_DETAILS: {
     42161: {
@@ -77,6 +79,16 @@ declare const NETWORK_DETAILS: {
         blockExplorerUrls: string[];
     };
     137: {
+        chainId: string;
+        chainName: string;
+        nativeCurrency: {
+            symbol: string;
+            decimals: number;
+        };
+        rpcUrls: string[];
+        blockExplorerUrls: string[];
+    };
+    256: {
         chainId: string;
         chainName: string;
         nativeCurrency: {
@@ -929,7 +941,7 @@ declare function useWallet(options?: useWalletOptions): {
     onChainChangedWallet: (callback: OnChainChangedCallback) => void;
 };
 
-declare const DEFAULT_FETCHING_WALLET_DATA = 10000;
+declare const DEFAULT_FETCHING_WALLET_DATA = 15000;
 declare function onActivate(externalProvider: ExternalProvider): Promise<void>;
 declare function useEthers(): {
     isActivated: Ref<boolean>;

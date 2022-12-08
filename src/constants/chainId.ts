@@ -9,7 +9,8 @@ export enum ChainId {
   Rinkarby = 421611,
   Arbitrum = 42161,
   Polygon = 137,
-  HECOTestnet = 256
+  HECOTestnet = 256，
+  GonChain = 10024
 }
 
 export const DEFAULT_INFURA_ID = '863c34ed0c4040409f4f61fecd08491e';
@@ -34,6 +35,7 @@ export const CHAIN_NAMES = {
   [ChainId.Arbitrum]: 'Arbitrum',
   [ChainId.Polygon]: 'Polygon',
   [ChainId.HECOTestnet]: 'Testnet',
+  [ChainId.GonChain]: 'GonChain'
 }
 
 // @todo add other network details. Refer to https://chainlist.org/
@@ -87,5 +89,15 @@ export const NETWORK_DETAILS = {
     },
     rpcUrls: ['https://http-testnet.hecochain.com'],
     blockExplorerUrls: ['https://testnet.hecoinfo.com'],
+  },
+  [ChainId.GonChain]: {
+    chainId: '0x' + ChainId.GonChain.toString(16),
+    chainName: 'Gon Chain',
+    nativeCurrency: {
+      symbol: 'GT',
+      decimals: 18,
+    },
+    rpcUrls: ['https://node1.testnet.gaiaopen.network'],
+    blockExplorerUrls: ['https://gonscan.com'],
   },
 }

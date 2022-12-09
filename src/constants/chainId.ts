@@ -13,7 +13,7 @@ export enum ChainId {
   GonChain = 10024
 }
 
-export const DEFAULT_INFURA_ID = '863c34ed0c4040409f4f61fecd08491e';
+export const DEFAULT_INFURA_ID = '2485de6bf0744ad4bdd1f3f9d26225eb';
 
 export const CONFIG_RPC_FOR_INFURA_IDS = {
   [ChainId.Mainnet]: `https://mainnet.infura.io/v3/${DEFAULT_INFURA_ID}`,

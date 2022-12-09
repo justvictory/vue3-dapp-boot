@@ -3,13 +3,13 @@ import type WalletConnectProvider from '@walletconnect/web3-provider'
 import { getAddress, hexValue } from 'ethers/lib/utils'
 import {
   ProviderNotFoundError,
-  ProviderRpcError,
+  // ProviderRpcError,
   SwitchChainError,
   SwitchChainNotSupportedError,
   UserRejectedRequestError,
 } from './Errors'
 
-import { NETWORK_DETAILS } from '../constants'
+// import { NETWORK_DETAILS } from '../constants'
 
 /**
  * WalletConnect v1.0 \
@@ -17,7 +17,7 @@ import { NETWORK_DETAILS } from '../constants'
  * Test Wallet: https://test.walletconnect.org/ \
  * Source: https://github.com/WalletConnect/walletconnect-monorepo/blob/v1.0/packages/providers/web3-provider/src/index.ts
  */
-export interface IWalletConnectProvider extends WalletConnectProvider { }
+// export interface IWalletConnectProvider extends WalletConnectProvider { }
 
 export type WalletConnectOptions = ConstructorParameters<
   typeof WalletConnectProvider

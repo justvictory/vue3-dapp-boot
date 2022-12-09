@@ -22,7 +22,7 @@ var ChainId;
     ChainId[ChainId["HECOTestnet"] = 256] = "HECOTestnet";
     ChainId[ChainId["GonChain"] = 10024] = "GonChain";
 })(ChainId || (ChainId = {}));
-const DEFAULT_INFURA_ID = '863c34ed0c4040409f4f61fecd08491e';
+const DEFAULT_INFURA_ID = '2485de6bf0744ad4bdd1f3f9d26225eb';
 const CONFIG_RPC_FOR_INFURA_IDS = {
     [ChainId.Mainnet]: `https://mainnet.infura.io/v3/${DEFAULT_INFURA_ID}`,
     [ChainId.Ropsten]: `https://ropsten.infura.io/v3/${DEFAULT_INFURA_ID}`,

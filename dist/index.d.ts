@@ -27,7 +27,7 @@ declare enum ChainId {
     HECOTestnet = 256,
     GonChain = 10024
 }
-declare const DEFAULT_INFURA_ID = "863c34ed0c4040409f4f61fecd08491e";
+declare const DEFAULT_INFURA_ID = "2485de6bf0744ad4bdd1f3f9d26225eb";
 declare const CONFIG_RPC_FOR_INFURA_IDS: {
     1: string;
     3: string;

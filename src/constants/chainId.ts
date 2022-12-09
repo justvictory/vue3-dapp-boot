@@ -9,7 +9,7 @@ export enum ChainId {
   Rinkarby = 421611,
   Arbitrum = 42161,
   Polygon = 137,
-  HECOTestnet = 256，
+  HECOTestnet = 256,
   GonChain = 10024
 }
 

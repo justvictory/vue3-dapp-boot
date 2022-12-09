@@ -19,8 +19,8 @@ import {onBeforeMount, ref, watch} from 'vue'
 
 const isDev = window.location.host === 'localhost:3000'
 const infuraId = isDev
-  ? '863c34ed0c4040409f4f61fecd08491e'
-  : '863c34ed0c4040409f4f61fecd08491e'
+  ? '2485de6bf0744ad4bdd1f3f9d26225eb'
+  : '2485de6bf0744ad4bdd1f3f9d26225eb'
 
 const { openBoard } = useBoard()
 const {

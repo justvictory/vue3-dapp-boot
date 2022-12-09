@@ -21,6 +21,7 @@ export const CONFIG_RPC_FOR_INFURA_IDS = {
   [ChainId.Rinkeby]: `https://rinkeby.infura.io/v3/${DEFAULT_INFURA_ID}`,
   [ChainId.Goerli]: `https://goerli.infura.io/v3/${DEFAULT_INFURA_ID}`,
   [ChainId.Kovan]: `https://kovan.infura.io/v3/${DEFAULT_INFURA_ID}`,
+  [ChainId.GonChain]: `https://node1.testnet.gaiaopen.network`,
 }
 
 export const CHAIN_NAMES = {

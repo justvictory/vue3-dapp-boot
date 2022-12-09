@@ -9,13 +9,15 @@ import {
   UserRejectedRequestError,
 } from './Errors'
 
+import { NETWORK_DETAILS } from '../constants'
+
 /**
  * WalletConnect v1.0 \
  * Docs: https://docs.walletconnect.com/quick-start/dapps/web3-provider \
  * Test Wallet: https://test.walletconnect.org/ \
  * Source: https://github.com/WalletConnect/walletconnect-monorepo/blob/v1.0/packages/providers/web3-provider/src/index.ts
  */
-export interface IWalletConnectProvider extends WalletConnectProvider {}
+export interface IWalletConnectProvider extends WalletConnectProvider { }
 
 export type WalletConnectOptions = ConstructorParameters<
   typeof WalletConnectProvider
@@ -137,12 +139,27 @@ export class WalletConnectConnector extends Connector<
         params: [{ chainId: id }],
       })
     } catch (error: unknown) {
-      const message =
-        typeof error === 'string' ? error : (<ProviderRpcError>error)?.message
-      if (/user rejected request/i.test(message)) {
-        throw new UserRejectedRequestError(error)
+      if (id === '0x2728') {
+        await this.#provider.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: "0x2728",
+              chainName: "Gon Chain",
+              rpcUrls: ["https://node1.testnet.gaiaopen.network"],
+              blockExplorerUrls: ["https://gonscan.com"],
+              nativeCurrency: {
+                name: "GT",
+                symbol: "GT",
+                decimals: 18,
+              },
+            },
+          ],
+        })
+          .catch((error: any) => {
+            throw new SwitchChainError(error)
+          });
       }
-      throw new SwitchChainError(error)
     }
   }
 }
